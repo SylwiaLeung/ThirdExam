@@ -1,20 +1,44 @@
+using CrimeService.Behaviours;
+using CrimeService.Data;
+using CrimeService.Models.Dtos;
+using CrimeService.Services.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Newtonsoft.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// SERVICES
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddFluentValidation()
+    .AddNewtonsoftJson(s =>
+    {
+        s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        s.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+    });
+
+builder.Services.AddScoped<ICrimeContext, CrimeContext>();
+builder.Services.AddScoped<ICrimeRepository, CrimeRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IValidator<CrimeCreateDto>, CrimeValidationBehaviour>();
+builder.Services.AddScoped<ErrorHandlingBehaviour>();
+
+// SZWAGIER
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// PIPELINE
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingBehaviour>();
 
 app.UseAuthorization();
 

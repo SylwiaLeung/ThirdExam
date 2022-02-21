@@ -13,7 +13,6 @@ namespace LawEnforcement.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped<UnhandledExceptionsBehaviour>();
             services.AddScoped<IValidator<EnforcementCreateDto>, EnforcementValidationBehaviour>();
 
