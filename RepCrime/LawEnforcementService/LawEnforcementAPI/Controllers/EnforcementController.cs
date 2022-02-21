@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CommonItems.Exceptions;
 using LawEnforcement.Application.Contracts;
-using LawEnforcement.Application.Exceptions;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

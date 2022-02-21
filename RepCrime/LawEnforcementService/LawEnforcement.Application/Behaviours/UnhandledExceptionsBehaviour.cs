@@ -1,4 +1,4 @@
-﻿using LawEnforcement.Application.Exceptions;
+﻿using CommonItems.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 

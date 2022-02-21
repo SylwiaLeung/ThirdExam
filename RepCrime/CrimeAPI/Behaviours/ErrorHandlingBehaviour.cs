@@ -1,4 +1,6 @@
-﻿namespace CrimeService.Behaviours
+﻿using CommonItems.Exceptions;
+
+namespace CrimeService.Behaviours
 {
     public class ErrorHandlingBehaviour : IMiddleware
     {

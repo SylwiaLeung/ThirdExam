@@ -1,4 +1,4 @@
-﻿namespace LawEnforcement.Application.Exceptions
+﻿namespace CommonItems.Exceptions
 {
     public class BadRequestException : Exception
     {
