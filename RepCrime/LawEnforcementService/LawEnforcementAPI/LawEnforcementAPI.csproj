@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CrimeAPI\CrimeService.csproj" />
-    <ProjectReference Include="..\..\EventBus.Messaging\EventBus.Messaging.csproj" />
     <ProjectReference Include="..\LawEnforcement.Infrastructure\LawEnforcement.Infrastructure.csproj" />
   </ItemGroup>
 
