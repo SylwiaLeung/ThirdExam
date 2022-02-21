@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using CommonItems.Enums;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
 
 namespace CrimeService.Models
 {

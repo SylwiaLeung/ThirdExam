@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using CrimeService.Models;
+using MongoDB.Driver;
 
 namespace CrimeService.Data
 {
