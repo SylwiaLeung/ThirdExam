@@ -9,18 +9,15 @@ namespace LawEnforcementAPI.EventBusConsumer
     public class CrimeEventConsumer : IConsumer<CrimeEvent>
     {
         private readonly ILogger<CrimeEventConsumer> _logger;
-        private readonly IMapper _mapper;
-        private readonly ICrimeEventRepository _crimeRepository;
+        private readonly ICrimeRepository _crimeRepository;
         private readonly IEnforcementRepository _enfRepository;
 
         public CrimeEventConsumer(
-            ILogger<CrimeEventConsumer> logger, 
-            IMapper mapper, 
-            ICrimeEventRepository crimeRepository, 
+            ILogger<CrimeEventConsumer> logger,
+            ICrimeRepository crimeRepository, 
             IEnforcementRepository enfRepository)
         {
             _logger = logger;
-            _mapper = mapper;
             _crimeRepository = crimeRepository;
             _enfRepository = enfRepository;
         }

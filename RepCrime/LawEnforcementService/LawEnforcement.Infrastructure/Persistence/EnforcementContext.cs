@@ -1,9 +1,6 @@
-﻿using LawEnforcement.Domain.Entities;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using EventBus.Messaging.Events;
+using LawEnforcement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace LawEnforcement.Infrastructure.Persistence
 {
@@ -14,5 +11,6 @@ namespace LawEnforcement.Infrastructure.Persistence
         }
 
         public DbSet<Enforcement> Enforcement { get; set; }
+        public DbSet<CrimeEvent> CrimeEvents { get; set; }
     }
 }

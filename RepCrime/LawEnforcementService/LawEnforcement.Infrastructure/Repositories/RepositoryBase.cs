@@ -19,7 +19,7 @@ namespace LawEnforcement.Infrastructure.Repositories
             await _context.Set<T>().AddAsync(entity);
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public virtual async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
