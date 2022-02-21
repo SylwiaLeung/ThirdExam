@@ -2,6 +2,7 @@
 using CrimeService.Models;
 using CrimeService.Models.Dtos;
 using CrimeService.Services.Repositories;
+using EventBus.Messaging.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,7 +41,7 @@ namespace CrimeService.Controllers
             return Ok(_mapper.Map<CrimeReadDto>(crime));
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<CrimeReadDto>> AddCrime(CrimeCreateDto crimeDto)
         {
             var crimeModel = _mapper.Map<Crime>(crimeDto);
