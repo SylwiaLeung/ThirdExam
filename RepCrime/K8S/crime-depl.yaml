@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crime-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: crimeservice
+  template:
+    metadata:
+      labels:
+        app: crimeservice
+    spec:
+      containers:
+        - name: crimeservice
+          image: kotpuot/crimeservice
+          ports:
+          - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crimeclusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: crimeservice
+  ports:
+    - name: crimeservice
+      protocol: TCP
+      port: 80
+      targetPort: 80
