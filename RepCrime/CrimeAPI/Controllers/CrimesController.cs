@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CrimeService.Models;
 using CrimeService.Models.Dtos;
 using CrimeService.Services.Repositories;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrimeService.Controllers
@@ -11,11 +13,15 @@ namespace CrimeService.Controllers
     {
         private readonly ICrimeRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ILogger<CrimesController> _logger;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public CrimesController(ICrimeRepository repository, IMapper mapper)
+        public CrimesController(ICrimeRepository repository, IMapper mapper, ILogger<CrimesController> logger, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
             _mapper = mapper;
+            _logger = logger;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -32,6 +38,21 @@ namespace CrimeService.Controllers
             var crime = await _repository.GetCrimeById(id);
 
             return Ok(_mapper.Map<CrimeReadDto>(crime));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<CrimeReadDto>> AddCrime(CrimeCreateDto crimeDto)
+        {
+            var crimeModel = _mapper.Map<Crime>(crimeDto);
+
+            await _repository.AddCrime(crimeModel);
+
+            _logger.LogInformation("---> Added crime to the databse");
+
+            var eventMessage = _mapper.Map<CrimeEvent>(crimeModel);
+            await _publishEndpoint.Publish(eventMessage);
+
+            return Ok(_mapper.Map<CrimeReadDto>(crimeModel));
         }
     }
 }
