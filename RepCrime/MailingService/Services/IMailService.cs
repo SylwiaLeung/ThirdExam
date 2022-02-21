@@ -2,7 +2,7 @@
 
 namespace MailingService.Services
 {
-    public interface IMailingService
+    public interface IMailService
     {
         Task<bool> SendEmail(Email email);
     }

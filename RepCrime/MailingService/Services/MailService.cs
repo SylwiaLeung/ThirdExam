@@ -5,12 +5,13 @@ using MimeKit;
 
 namespace MailingService.Services
 {
-    public class MailingService : IMailingService
+    public class MailService : IMailService
     {
         private readonly EmailSettings _emailSettings;
-        private readonly ILogger<MailingService> _logger;
+        private readonly ILogger<MailService> _logger;
         private readonly IConfiguration _configuration;
-        public MailingService(IOptions<EmailSettings> emailSettings, ILogger<MailingService> logger, IConfiguration configuration)
+
+        public MailService(IOptions<EmailSettings> emailSettings, ILogger<MailService> logger, IConfiguration configuration)
         {
             _emailSettings = emailSettings.Value;
             _logger = logger;
