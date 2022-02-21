@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using MailingService.Models;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
@@ -33,13 +34,13 @@ namespace MailingService.Services
 
             using (var client = new SmtpClient())
             {
-                client.Connect(_emailSettings.Host, _emailSettings.Port);
+                await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                client.Authenticate(_configuration["EmailRecipient:Username"], _configuration["EmailRecipient:Password"]);
+                await client.AuthenticateAsync(_configuration["EmailRecipient:Username"], _configuration["EmailRecipient:Password"]);
 
-                client.Send(message);
-                client.Disconnect(true);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
             }
             return true;
         }

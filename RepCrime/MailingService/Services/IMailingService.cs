@@ -1,4 +1,6 @@
-﻿namespace MailingService.Services
+﻿using MailingService.Models;
+
+namespace MailingService.Services
 {
     public interface IMailingService
     {
