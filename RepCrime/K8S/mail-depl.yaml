@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mail-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: mailservice
+  template:
+    metadata:
+      labels:
+        app: mailservice
+    spec:
+      containers:
+        - name: mailservice
+          image: kotpuot/mailservice:latest
+          ports:
+          - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailclusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: mailservice
+  ports:
+    - name: mailservice
+      protocol: TCP
+      port: 80
+      targetPort: 80
