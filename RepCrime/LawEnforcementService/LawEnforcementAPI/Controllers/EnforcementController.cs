@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using CommonItems.Enums;
 using CommonItems.Exceptions;
 using CommonItems.Models;
+using EventBus.Messaging.Events;
 using LawEnforcement.Application.Contracts;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LawEnforcementAPI.Controllers
@@ -14,11 +17,15 @@ namespace LawEnforcementAPI.Controllers
     {
         private readonly IEnforcementRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ICrimeRepository _crimeRepo;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public EnforcementController(IEnforcementRepository repository, IMapper mapper)
+        public EnforcementController(IEnforcementRepository repository, ICrimeRepository crimeRepo, IMapper mapper, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
             _mapper = mapper;
+            _crimeRepo = crimeRepo;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -67,6 +74,23 @@ namespace LawEnforcementAPI.Controllers
             await _repository.Save();
 
             return Ok(_mapper.Map<EnforcementReadDto>(enforcementModel));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateEnforcementStatus(string id, Status status)
+        {
+            var crimeToUpdate = await _crimeRepo.GetByIdAsync(id);
+
+            if (crimeToUpdate == null)
+                throw new NotFoundException("No such id in the database");
+
+            crimeToUpdate.Status = status;
+            await _crimeRepo.Save();
+
+            var eventMessage = _mapper.Map<CrimeUpdateEvent>(crimeToUpdate);
+            await _publishEndpoint.Publish(eventMessage);
+
+            return Ok();
         }
     }
 }

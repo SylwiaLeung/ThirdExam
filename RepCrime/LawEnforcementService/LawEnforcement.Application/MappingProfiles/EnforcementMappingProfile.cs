@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EventBus.Messaging.Events;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
 
@@ -10,6 +11,7 @@ namespace LawEnforcement.Application.MappingProfiles
         {
             CreateMap<Enforcement, EnforcementReadDto>().ReverseMap();
             CreateMap<EnforcementCreateDto, Enforcement>();
+            CreateMap<CrimeUpdateEvent, CrimeEvent>().ReverseMap();
         }
     }
 }
