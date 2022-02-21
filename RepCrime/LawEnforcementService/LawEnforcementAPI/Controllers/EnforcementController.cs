@@ -77,14 +77,14 @@ namespace LawEnforcementAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateEnforcementStatus(string id, Status status)
+        public async Task<ActionResult> UpdateEnforcementStatus(string id)
         {
             var crimeToUpdate = await _crimeRepo.GetByIdAsync(id);
 
             if (crimeToUpdate == null)
                 throw new NotFoundException("No such id in the database");
 
-            crimeToUpdate.Status = status;
+            crimeToUpdate.Status = Status.Accepted;
             await _crimeRepo.Save();
 
             var eventMessage = _mapper.Map<CrimeUpdateEvent>(crimeToUpdate);
