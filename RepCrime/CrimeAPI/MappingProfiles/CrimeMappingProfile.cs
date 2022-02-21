@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CrimeService.Models;
 using CrimeService.Models.Dtos;
+using EventBus.Messaging.Events;
 
 namespace CrimeService.MappingProfiles
 {
@@ -10,6 +11,7 @@ namespace CrimeService.MappingProfiles
         {
             CreateMap<CrimeCreateDto, Crime>();
             CreateMap<Crime, CrimeReadDto>();
+            CreateMap<Crime, CrimeEvent>();
         }
     }
 }
