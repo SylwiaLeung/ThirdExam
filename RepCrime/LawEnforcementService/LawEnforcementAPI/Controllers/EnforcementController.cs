@@ -12,13 +12,11 @@ namespace LawEnforcementAPI.Controllers
     public class EnforcementController : ControllerBase
     {
         private readonly IEnforcementRepository _repository;
-        private readonly ILogger<EnforcementController> _logger;
         private readonly IMapper _mapper;
 
-        public EnforcementController(IEnforcementRepository repository, ILogger<EnforcementController> logger, IMapper mapper)
+        public EnforcementController(IEnforcementRepository repository, IMapper mapper)
         {
             _repository = repository;
-            _logger = logger;
             _mapper = mapper;
         }
 

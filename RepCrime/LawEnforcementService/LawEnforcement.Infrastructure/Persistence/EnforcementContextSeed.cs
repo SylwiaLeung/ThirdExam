@@ -1,6 +1,7 @@
 ﻿using LawEnforcement.Domain;
 using LawEnforcement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LawEnforcement.Infrastructure.Persistence
 {
