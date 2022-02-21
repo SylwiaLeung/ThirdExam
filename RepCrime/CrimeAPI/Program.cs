@@ -4,6 +4,7 @@ using CrimeService.Models.Dtos;
 using CrimeService.Services.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MassTransit;
 using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,17 @@ builder.Services.AddScoped<ICrimeRepository, CrimeRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IValidator<CrimeCreateDto>, CrimeValidationBehaviour>();
 builder.Services.AddScoped<ErrorHandlingBehaviour>();
+
+//RABBITMQ
+
+builder.Services.AddMassTransit(config =>
+{
+    config.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    });
+});
+builder.Services.AddMassTransitHostedService();
 
 // SZWAGIER
 
