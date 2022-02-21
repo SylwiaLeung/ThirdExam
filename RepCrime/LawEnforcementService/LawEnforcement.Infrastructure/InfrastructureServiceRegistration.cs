@@ -13,6 +13,7 @@ namespace LawEnforcement.Infrastructure
             services.AddDbContext<EnforcementContext>(options => options.UseInMemoryDatabase(databaseName: "EnforcementDb"));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped<IEnforcementRepository, EnforcementRepository>();
+            services.AddScoped<ICrimeRepository, CrimeRepository>();
 
             return services;
         }
