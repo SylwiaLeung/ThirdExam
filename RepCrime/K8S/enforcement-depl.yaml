@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crime-depl
+  name: enforcement-depl
 spec:
   replicas: 1
   selector: 
     matchLabels:
-      app: crimeservice
+      app: enforcementservice
   template:
     metadata:
       labels:
-        app: crimeservice
+        app: enforcementservice
     spec:
       containers:
-        - name: crimeservice
-          image: kotpuot/crimeservice:latest
+        - name: enforcementservice
+          image: kotpuot/enforcementservice:latest
           ports:
           - containerPort: 80
           env:
@@ -24,13 +24,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: crimeclusterip-service
+  name: enforcementclusterip-service
 spec:
   type: ClusterIP
   selector:
-    app: crimeservice
+    app: enforcementservice
   ports:
-    - name: crimeservice
+    - name: enforcementservice
       protocol: TCP
       port: 80
       targetPort: 80
