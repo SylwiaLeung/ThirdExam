@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CommonItems.Exceptions;
+using CommonItems.Models;
 using CrimeService.Models;
 using CrimeService.Models.Dtos;
 using CrimeService.Services.Repositories;
@@ -26,11 +28,31 @@ namespace CrimeService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CrimeReadDto>>> GetCrimes()
+        public async Task<ActionResult<IEnumerable<CrimeReadDto>>> GetCrimes([FromQuery] QueryModel query)
         {
-            var crimes = await _repository.GetCrimes();
+            
 
-            return Ok(_mapper.Map<List<CrimeReadDto>>(crimes));
+            if (query.PageNumber == 0 || query.PageSize == 0)
+                throw new BadRequestException("You must specify page number and page size.");
+
+            var crimes = await _repository.GetCrimes();
+            var crimeDtos = _mapper.Map<List<CrimeReadDto>>(crimes);
+
+            var baseQuery = crimeDtos
+                .Where(e => query.SearchPhrase == null
+                || e.CrimeType.ToString().ToLower().Contains(query.SearchPhrase.ToLower())
+                || e.PlaceOfCrime.ToLower().Contains(query.SearchPhrase.ToLower()));
+
+            var filteredDtos = baseQuery
+                .Skip(query.PageSize * (query.PageNumber - 1))
+                .Take(query.PageSize)
+                .ToList();
+
+            var totalItemsCount = baseQuery.Count();
+
+            var result = new PagedResultModel<CrimeReadDto>(filteredDtos, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]

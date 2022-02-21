@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CommonItems.Exceptions;
+using CommonItems.Models;
 using LawEnforcement.Application.Contracts;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
@@ -21,11 +22,29 @@ namespace LawEnforcementAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EnforcementReadDto>>> GetAllEnforcement()
+        public async Task<ActionResult<PagedResultModel<EnforcementReadDto>>> GetAllEnforcement([FromQuery] QueryModel query)
         {
-            var enforcement = await _repository.GetAllAsync();
+            if (query.PageNumber == 0 || query.PageSize == 0)
+                throw new BadRequestException("You must specify page number and page size.");
 
-            return Ok(_mapper.Map<List<EnforcementReadDto>>(enforcement));
+            var enforcement = await _repository.GetAllAsync();
+            var enforcementDtos = _mapper.Map<List<EnforcementReadDto>>(enforcement);
+            
+            var baseQuery = enforcementDtos
+                .Where(e => query.SearchPhrase == null
+                || e.Name.ToLower().Contains(query.SearchPhrase.ToLower())
+                || e.Rank.ToString().ToLower().Contains(query.SearchPhrase.ToLower()));
+
+            var filteredDtos = baseQuery
+                .Skip(query.PageSize * (query.PageNumber - 1))
+                .Take(query.PageSize)
+                .ToList();
+
+            var totalItemsCount = baseQuery.Count();
+
+            var result = new PagedResultModel<EnforcementReadDto>(filteredDtos, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
