@@ -2,6 +2,7 @@
 using LawEnforcement.Application.Contracts;
 using LawEnforcement.Application.Exceptions;
 using LawEnforcement.Domain.DTO;
+using LawEnforcement.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LawEnforcementAPI.Controllers
@@ -40,5 +41,15 @@ namespace LawEnforcementAPI.Controllers
             return Ok(_mapper.Map<EnforcementReadDto>(enforcement));
         }
 
+        [HttpPost]
+        public async Task<ActionResult<EnforcementReadDto>> CreateEnforcementUnit(EnforcementCreateDto enforcement)
+        {
+            var enforcementModel = _mapper.Map<Enforcement>(enforcement);
+
+            await _repository.AddAsync(enforcementModel);
+            await _repository.Save();
+
+            return Ok(_mapper.Map<EnforcementReadDto>(enforcementModel));
+        }
     }
 }
