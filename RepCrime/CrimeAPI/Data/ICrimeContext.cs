@@ -1,4 +1,6 @@
-﻿namespace CrimeService.Data
+﻿using MongoDB.Driver;
+
+namespace CrimeService.Data
 {
     public class ICrimeContext
     {
