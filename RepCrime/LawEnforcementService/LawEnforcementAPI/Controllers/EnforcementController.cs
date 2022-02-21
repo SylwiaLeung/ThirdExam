@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LawEnforcement.Application.Contracts;
+using LawEnforcement.Application.Exceptions;
 using LawEnforcement.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,17 @@ namespace LawEnforcementAPI.Controllers
 
             return Ok(_mapper.Map<List<EnforcementReadDto>>(enforcement));
         }
-       
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EnforcementReadDto>> GetEnforcementById(string id)
+        {
+            var enforcement = await _repository.GetByIdAsync(id);
+
+            if (enforcement == null)
+                throw new NotFoundException("---> Error: No such id in the database");
+
+            return Ok(_mapper.Map<EnforcementReadDto>(enforcement));
+        }
+
     }
 }
