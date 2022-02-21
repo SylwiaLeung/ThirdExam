@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CommonItems.Exceptions;
+﻿using CommonItems.Exceptions;
 using EventBus.Messaging.Events;
 using LawEnforcement.Application.Contracts;
 using MassTransit;
@@ -14,7 +13,7 @@ namespace LawEnforcementAPI.EventBusConsumer
 
         public CrimeEventConsumer(
             ILogger<CrimeEventConsumer> logger,
-            ICrimeRepository crimeRepository, 
+            ICrimeRepository crimeRepository,
             IEnforcementRepository enfRepository)
         {
             _logger = logger;

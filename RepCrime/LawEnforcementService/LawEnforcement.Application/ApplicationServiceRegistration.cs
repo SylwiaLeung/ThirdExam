@@ -2,8 +2,6 @@
 using LawEnforcement.Application.Behaviours;
 using LawEnforcement.Domain.DTO;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace LawEnforcement.Application
