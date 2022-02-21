@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace CrimeService.Data
 {
-    public class ICrimeContext
+    public interface ICrimeContext
     {
         IMongoCollection<Crime> Crimes { get; }
     }
