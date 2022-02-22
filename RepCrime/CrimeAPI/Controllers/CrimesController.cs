@@ -30,7 +30,7 @@ namespace CrimeService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CrimeReadDto>>> GetCrimes([FromQuery] QueryModel query)
         {
-            
+
 
             if (query.PageNumber == 0 || query.PageSize == 0)
                 throw new BadRequestException("You must specify page number and page size.");
@@ -100,6 +100,11 @@ namespace CrimeService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCrime(string id)
         {
+            var crimeToDelete = await _repository.GetCrimeById(id);
+
+            if (crimeToDelete == null)
+                throw new NotFoundException("No crime with this ID in the database");
+
             var success = await _repository.DeleteCrime(id);
 
             if (!success)

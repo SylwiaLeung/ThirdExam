@@ -26,12 +26,12 @@ namespace MailingService.EventBusConsumer
 
         private async Task SendMail(CrimeUpdateEvent crime)
         {
-            var email = new Email() 
-            { 
-                ToAddress = $"{crime.WitnessEmail}", 
-                Body = $"Hello, {crime.WitnessName}!\nThe crime you have reported has changed its status.\nCurrent status: {crime.Status}", 
-                Subject = "Change of crime status", 
-                ToName = $"{crime.WitnessName}" 
+            var email = new Email()
+            {
+                ToAddress = $"{crime.WitnessEmail}",
+                Body = $"Hello, {crime.WitnessName}!\nThe crime you have reported has changed its status.\nCurrent status: {crime.Status}",
+                Subject = "Change of crime status",
+                ToName = $"{crime.WitnessName}"
             };
 
             try

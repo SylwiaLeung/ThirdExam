@@ -22,9 +22,9 @@ namespace LawEnforcementAPI.Controllers
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly ICrimeEventClient _httpClient;
 
-        public EnforcementController(IEnforcementRepository repository, 
-            ICrimeRepository crimeRepo, 
-            IMapper mapper, 
+        public EnforcementController(IEnforcementRepository repository,
+            ICrimeRepository crimeRepo,
+            IMapper mapper,
             IPublishEndpoint publishEndpoint,
             ICrimeEventClient httpClient)
         {
@@ -43,7 +43,7 @@ namespace LawEnforcementAPI.Controllers
 
             var enforcement = await _repository.GetAllAsync();
             var enforcementDtos = _mapper.Map<List<EnforcementReadDto>>(enforcement);
-            
+
             var baseQuery = enforcementDtos
                 .Where(e => query.SearchPhrase == null
                 || e.Name.ToLower().Contains(query.SearchPhrase.ToLower())
