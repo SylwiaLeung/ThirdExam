@@ -32,5 +32,14 @@ namespace CrimeService.Services.Repositories
                 .Find(h => h.Id == id)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> UpdateHealthbook(Crime crime)
+        {
+            var updateResult = await _context
+                .Crimes
+                .ReplaceOneAsync(filter: g => g.Id == crime.Id, replacement: crime);
+
+            return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
+        }
     }
 }
