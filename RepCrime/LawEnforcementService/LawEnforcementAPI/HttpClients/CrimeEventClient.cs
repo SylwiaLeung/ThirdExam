@@ -1,10 +1,10 @@
-﻿using CommonItems.Models;
+﻿using EventBus.Messaging.Events;
 using System.Text;
 using System.Text.Json;
 
 namespace LawEnforcementAPI.HttpClients
 {
-    public class CrimeEventClient
+    public class CrimeEventClient : ICrimeEventClient
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
@@ -17,7 +17,7 @@ namespace LawEnforcementAPI.HttpClients
             _logger = logger;
         }
 
-        public async Task SendUpdatedCrime(CrimeUpdateDto crime)
+        public async Task SendUpdatedCrime(CrimeEvent crime)
         {
             var httpContent = new StringContent(
                 JsonSerializer.Serialize(crime),

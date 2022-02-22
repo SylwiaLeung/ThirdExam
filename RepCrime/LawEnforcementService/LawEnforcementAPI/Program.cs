@@ -5,6 +5,7 @@ using LawEnforcement.Application.Behaviours;
 using LawEnforcement.Infrastructure;
 using LawEnforcement.Infrastructure.Persistence;
 using LawEnforcementAPI.EventBusConsumer;
+using LawEnforcementAPI.HttpClients;
 using MassTransit;
 using Newtonsoft.Json.Serialization;
 
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+builder.Services.AddScoped<ICrimeEventClient, CrimeEventClient>();
 
 builder.Services.AddControllers().AddFluentValidation()
     .AddNewtonsoftJson(s =>

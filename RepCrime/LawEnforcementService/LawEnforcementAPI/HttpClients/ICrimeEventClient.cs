@@ -1,9 +1,9 @@
-﻿using CommonItems.Models;
+﻿using EventBus.Messaging.Events;
 
 namespace LawEnforcementAPI.HttpClients
 {
     public interface ICrimeEventClient
     {
-        Task SendUpdatedCrime(CrimeUpdateDto crime);
+        Task SendUpdatedCrime(CrimeEvent crime);
     }
 }

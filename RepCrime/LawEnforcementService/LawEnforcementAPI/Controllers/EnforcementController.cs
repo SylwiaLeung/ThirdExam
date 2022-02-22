@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CommonItems.Enums;
 using CommonItems.Exceptions;
 using CommonItems.Models;
 using EventBus.Messaging.Events;
 using LawEnforcement.Application.Contracts;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
+using LawEnforcementAPI.HttpClients;
 using MassTransit;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +20,19 @@ namespace LawEnforcementAPI.Controllers
         private readonly IMapper _mapper;
         private readonly ICrimeRepository _crimeRepo;
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly ICrimeEventClient _httpClient;
 
-        public EnforcementController(IEnforcementRepository repository, ICrimeRepository crimeRepo, IMapper mapper, IPublishEndpoint publishEndpoint)
+        public EnforcementController(IEnforcementRepository repository, 
+            ICrimeRepository crimeRepo, 
+            IMapper mapper, 
+            IPublishEndpoint publishEndpoint,
+            ICrimeEventClient httpClient)
         {
             _repository = repository;
             _mapper = mapper;
             _crimeRepo = crimeRepo;
             _publishEndpoint = publishEndpoint;
+            _httpClient = httpClient;
         }
 
         [HttpGet]
@@ -98,6 +104,7 @@ namespace LawEnforcementAPI.Controllers
 
             var eventMessage = _mapper.Map<CrimeUpdateEvent>(crimeModel);
             await _publishEndpoint.Publish(eventMessage);
+            await _httpClient.SendUpdatedCrime(crimeModel);
 
             return NoContent();
         }
