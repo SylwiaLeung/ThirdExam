@@ -77,5 +77,18 @@ namespace CrimeService.Controllers
 
             return Ok(_mapper.Map<CrimeReadDto>(crimeModel));
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CrimeReadDto>> UpdateCrime(string id, CrimeEvent crime)
+        {
+            var crimeToUpdate = await _repository.GetCrimeById(id);
+
+            if (crimeToUpdate == null)
+                throw new NotFoundException("No such ID in the database");
+
+            var updatedCrime = _mapper.Map(crime, crimeToUpdate);
+
+            return Ok(_mapper.Map<CrimeReadDto>(updatedCrime));
+        }
     }
 }

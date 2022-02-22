@@ -10,8 +10,8 @@ namespace CrimeService.MappingProfiles
         public CrimeMappingProfile()
         {
             CreateMap<CrimeCreateDto, Crime>();
-            CreateMap<Crime, CrimeReadDto>();
-            CreateMap<Crime, CrimeEvent>();
+            CreateMap<Crime, CrimeReadDto>().ReverseMap();
+            CreateMap<Crime, CrimeEvent>().ReverseMap();
         }
     }
 }

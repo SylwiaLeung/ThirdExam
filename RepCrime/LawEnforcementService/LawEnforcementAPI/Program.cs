@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
-builder.Services.AddScoped<ICrimeEventClient, CrimeEventClient>();
+builder.Services.AddHttpClient<ICrimeEventClient, CrimeEventClient>();
 
 builder.Services.AddControllers().AddFluentValidation()
     .AddNewtonsoftJson(s =>
