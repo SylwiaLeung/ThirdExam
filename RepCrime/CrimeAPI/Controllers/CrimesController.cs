@@ -81,12 +81,18 @@ namespace CrimeService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<CrimeReadDto>> UpdateCrime(string id, CrimeEvent crime)
         {
+            _logger.LogInformation("---> Invoking PUT CRIME method");
+
             var crimeToUpdate = await _repository.GetCrimeById(id);
 
             if (crimeToUpdate == null)
                 throw new NotFoundException("No such ID in the database");
 
             var updatedCrime = _mapper.Map(crime, crimeToUpdate);
+            var success = await _repository.UpdateCrime(updatedCrime);
+
+            if (!success)
+                throw new Exception("Could not update the crime");
 
             return Ok(_mapper.Map<CrimeReadDto>(updatedCrime));
         }

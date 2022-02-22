@@ -7,5 +7,6 @@ namespace CrimeService.Services.Repositories
         Task<IEnumerable<Crime>> GetCrimes();
         Task<Crime> GetCrimeById(string id);
         Task AddCrime(Crime healthbook);
+        Task<bool> UpdateCrime(Crime crime);
     }
 }

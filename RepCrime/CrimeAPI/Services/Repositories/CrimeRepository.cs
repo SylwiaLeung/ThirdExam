@@ -33,7 +33,7 @@ namespace CrimeService.Services.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateHealthbook(Crime crime)
+        public async Task<bool> UpdateCrime(Crime crime)
         {
             var updateResult = await _context
                 .Crimes
