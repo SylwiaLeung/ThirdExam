@@ -7,6 +7,7 @@ using LawEnforcement.Application.Contracts;
 using LawEnforcement.Domain.DTO;
 using LawEnforcement.Domain.Entities;
 using MassTransit;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LawEnforcementAPI.Controllers
@@ -91,6 +92,31 @@ namespace LawEnforcementAPI.Controllers
             await _publishEndpoint.Publish(eventMessage);
 
             return Ok();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> UpdateEnforcementUnit(string id, JsonPatchDocument<CrimeUpdateDto> patchDoc)
+        {
+            var crimeModel = await _crimeRepo.GetByIdAsync(id);
+
+            if (crimeModel == null)
+                throw new NotFoundException("No such id in the database");
+
+            var crimeToPatch = _mapper.Map<CrimeUpdateDto>(crimeModel);
+
+            patchDoc.ApplyTo(crimeToPatch, ModelState);
+            if (!TryValidateModel(crimeToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(crimeToPatch, crimeModel);
+            await _crimeRepo.Save();
+
+            var eventMessage = _mapper.Map<CrimeUpdateEvent>(crimeModel);
+            await _publishEndpoint.Publish(eventMessage);
+
+            return NoContent();
         }
     }
 }
