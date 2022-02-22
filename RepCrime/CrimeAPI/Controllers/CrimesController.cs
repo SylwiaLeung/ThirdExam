@@ -96,5 +96,16 @@ namespace CrimeService.Controllers
 
             return Ok(_mapper.Map<CrimeReadDto>(updatedCrime));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCrime(string id)
+        {
+            var success = await _repository.DeleteCrime(id);
+
+            if (!success)
+                throw new Exception("Could not delete the crime");
+
+            return NoContent();
+        }
     }
 }

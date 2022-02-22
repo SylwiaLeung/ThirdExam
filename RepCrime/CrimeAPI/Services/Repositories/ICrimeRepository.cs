@@ -8,5 +8,6 @@ namespace CrimeService.Services.Repositories
         Task<Crime> GetCrimeById(string id);
         Task AddCrime(Crime healthbook);
         Task<bool> UpdateCrime(Crime crime);
+        Task<bool> DeleteCrime(string id);
     }
 }

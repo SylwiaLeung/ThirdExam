@@ -41,5 +41,17 @@ namespace CrimeService.Services.Repositories
 
             return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
         }
+
+        public async Task<bool> DeleteCrime(string id)
+        {
+            FilterDefinition<Crime> filter = Builders<Crime>.Filter.Eq(p => p.Id, id);
+
+            var deleteResult = await _context
+                .Crimes
+                .DeleteOneAsync(filter);
+
+            return deleteResult.IsAcknowledged
+                && deleteResult.DeletedCount > 0;
+        }
     }
 }
