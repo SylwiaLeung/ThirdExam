@@ -12,6 +12,7 @@ namespace LawEnforcement.Application.MappingProfiles
             CreateMap<Enforcement, EnforcementReadDto>().ReverseMap();
             CreateMap<EnforcementCreateDto, Enforcement>();
             CreateMap<CrimeUpdateEvent, CrimeEvent>().ReverseMap();
+            CreateMap<CrimeUpdateDto, CrimeEvent>().ReverseMap();
         }
     }
 }

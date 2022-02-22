@@ -77,23 +77,6 @@ namespace LawEnforcementAPI.Controllers
             return Ok(_mapper.Map<EnforcementReadDto>(enforcementModel));
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateEnforcementStatus(string id)
-        {
-            var crimeToUpdate = await _crimeRepo.GetByIdAsync(id);
-
-            if (crimeToUpdate == null)
-                throw new NotFoundException("No such id in the database");
-
-            crimeToUpdate.Status = Status.Accepted;
-            await _crimeRepo.Save();
-
-            var eventMessage = _mapper.Map<CrimeUpdateEvent>(crimeToUpdate);
-            await _publishEndpoint.Publish(eventMessage);
-
-            return Ok();
-        }
-
         [HttpPatch("{id}")]
         public async Task<ActionResult> UpdateEnforcementUnit(string id, JsonPatchDocument<CrimeUpdateDto> patchDoc)
         {
