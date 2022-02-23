@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrimeService", "CrimeAPI\CrimeService.csproj", "{E10E730F-5748-47F0-A3A2-9FD5E4A76C1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrimeService", "CrimeAPI\CrimeService.csproj", "{E10E730F-5748-47F0-A3A2-9FD5E4A76C1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LawEnforcementService", "LawEnforcementService", "{5EA26453-91B3-440A-BBBD-ECA197C9C3B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawEnforcementAPI", "LawEnforcementService\LawEnforcementAPI\LawEnforcementAPI.csproj", "{690397A4-6585-4B2D-9BCD-0FCDBB8FBAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawEnforcementAPI", "LawEnforcementService\LawEnforcementAPI\LawEnforcementAPI.csproj", "{690397A4-6585-4B2D-9BCD-0FCDBB8FBAD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawEnforcement.Domain", "LawEnforcementService\LawEnforcement.Domain\LawEnforcement.Domain.csproj", "{BBA5C345-9FFA-4F76-932C-DC046D4A8AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawEnforcement.Domain", "LawEnforcementService\LawEnforcement.Domain\LawEnforcement.Domain.csproj", "{BBA5C345-9FFA-4F76-932C-DC046D4A8AB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawEnforcement.Infrastructure", "LawEnforcementService\LawEnforcement.Infrastructure\LawEnforcement.Infrastructure.csproj", "{CBED78E7-384E-4462-A613-B95659B3E832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawEnforcement.Infrastructure", "LawEnforcementService\LawEnforcement.Infrastructure\LawEnforcement.Infrastructure.csproj", "{CBED78E7-384E-4462-A613-B95659B3E832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawEnforcement.Application", "LawEnforcementService\LawEnforcement.Application\LawEnforcement.Application.csproj", "{BA7AE2E0-665A-4E3C-8C2D-E9F271432ED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawEnforcement.Application", "LawEnforcementService\LawEnforcement.Application\LawEnforcement.Application.csproj", "{BA7AE2E0-665A-4E3C-8C2D-E9F271432ED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonItems", "CommonItems\CommonItems.csproj", "{4DE97BD0-F98B-44D3-8722-FCA05B896DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonItems", "CommonItems\CommonItems.csproj", "{4DE97BD0-F98B-44D3-8722-FCA05B896DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messaging", "EventBus.Messaging\EventBus.Messaging.csproj", "{27C5DD96-B3DF-48CE-AC23-F67A39C3B3C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messaging", "EventBus.Messaging\EventBus.Messaging.csproj", "{27C5DD96-B3DF-48CE-AC23-F67A39C3B3C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailingService", "MailingService\MailingService.csproj", "{E122F31C-4137-4F0A-B70E-0C2B376F87A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailingService", "MailingService\MailingService.csproj", "{E122F31C-4137-4F0A-B70E-0C2B376F87A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8B90B848-4967-48FA-B999-E9A68720EC4B}"
 EndProject
@@ -28,6 +28,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrimesService", "CrimesService", "{A5F2E0EE-11AE-4527-B6AE-CDE1018E7357}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MailService", "MailService", "{AB45D1BE-A842-4349-BA8F-52F56AC29265}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StatisticsService", "StatisticsService", "{73C11297-F8C3-4F20-B9CB-7F463CCDA3C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticService", "StatisticsService\StatisticService\StatisticService.csproj", "{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +71,10 @@ Global
 		{E122F31C-4137-4F0A-B70E-0C2B376F87A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E122F31C-4137-4F0A-B70E-0C2B376F87A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E122F31C-4137-4F0A-B70E-0C2B376F87A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +88,7 @@ Global
 		{4DE97BD0-F98B-44D3-8722-FCA05B896DB1} = {8B90B848-4967-48FA-B999-E9A68720EC4B}
 		{27C5DD96-B3DF-48CE-AC23-F67A39C3B3C1} = {14C78BA5-385D-4C55-B784-BBD1A39A6A9C}
 		{E122F31C-4137-4F0A-B70E-0C2B376F87A6} = {AB45D1BE-A842-4349-BA8F-52F56AC29265}
+		{CD4A143B-8CDE-474A-8D7C-55F2BC89C79C} = {73C11297-F8C3-4F20-B9CB-7F463CCDA3C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DF80888-4E48-4F3F-8BEF-046C9F871166}
