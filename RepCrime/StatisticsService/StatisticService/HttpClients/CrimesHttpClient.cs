@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Formatting;
+﻿using CommonItems.Dtos;
+using System.Net.Http.Formatting;
 
 namespace StatisticService.HttpClients
 {
@@ -15,25 +16,20 @@ namespace StatisticService.HttpClients
             _logger = logger;
         }
 
-        public async Task<Dictionary<DateTime, int>> GetDailyCrimeRate()
+        public async Task<IEnumerable<EnforcementStatsReadDto>> GetNumberOfCrimesPerOfficer()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{_configuration["CrimeService"]}/");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{_configuration["EnforcementService"]}/unitstats");
             var response = await _httpClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(await response.Content.ReadAsStringAsync());
-                return await response.Content.ReadAsAsync<Dictionary<DateTime, int>>(new[] { new JsonMediaTypeFormatter() });
+                _logger.LogInformation("--> Sync GET from EnforcementService was OK");
+                return await response.Content.ReadAsAsync<List<EnforcementStatsReadDto>>(new[] { new JsonMediaTypeFormatter() });
             }
             else
             {
-                return null;
+                throw new BadHttpRequestException("Couldn't send a request synchronously...");
             }
-        }
-
-        public Task<Dictionary<string, int>> GetNumberOfCrimesPerOfficer()
-        {
-            throw new NotImplementedException();
         }
     }
 }

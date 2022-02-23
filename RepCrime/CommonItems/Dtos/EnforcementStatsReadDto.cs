@@ -1,4 +1,4 @@
-﻿namespace LawEnforcement.Domain.DTO
+﻿namespace CommonItems.Dtos
 {
     public class EnforcementStatsReadDto
     {

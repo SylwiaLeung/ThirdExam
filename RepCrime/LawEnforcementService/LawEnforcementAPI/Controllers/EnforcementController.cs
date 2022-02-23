@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommonItems.Dtos;
 using CommonItems.Exceptions;
 using CommonItems.Models;
 using EventBus.Messaging.Events;
@@ -72,7 +73,7 @@ namespace LawEnforcementAPI.Controllers
             return Ok(_mapper.Map<EnforcementReadDto>(enforcement));
         }
 
-        [HttpGet("crimestats")]
+        [HttpGet("unitstats")]
         public async Task<ActionResult<IEnumerable<EnforcementStatsReadDto>>> GetCrimesPerEnforcementUnit()
         {
             var enforcement = await _repository.GetAllAsync();

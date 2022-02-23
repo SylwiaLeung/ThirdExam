@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommonItems.Dtos;
 using CommonItems.Models;
 using EventBus.Messaging.Events;
 using LawEnforcement.Domain.DTO;

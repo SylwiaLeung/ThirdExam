@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using CommonItems.Dtos;
 
 namespace StatisticService.HttpClients
 {
     public interface ICrimesHttpClient
     {
-        Task<Dictionary<DateTime, int>> GetDailyCrimeRate();
-        Task<Dictionary<string, int>> GetNumberOfCrimesPerOfficer();
+        Task<IEnumerable<EnforcementStatsReadDto>> GetNumberOfCrimesPerOfficer();
     }
 }
