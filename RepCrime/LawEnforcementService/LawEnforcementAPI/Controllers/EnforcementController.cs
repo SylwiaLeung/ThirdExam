@@ -72,6 +72,14 @@ namespace LawEnforcementAPI.Controllers
             return Ok(_mapper.Map<EnforcementReadDto>(enforcement));
         }
 
+        [HttpGet("crimestats")]
+        public async Task<ActionResult<IEnumerable<EnforcementStatsReadDto>>> GetCrimesPerEnforcementUnit()
+        {
+            var enforcement = await _repository.GetAllAsync();
+
+            return Ok(_mapper.Map<List<EnforcementStatsReadDto>>(enforcement));
+        }
+
         [HttpPost]
         public async Task<ActionResult<EnforcementReadDto>> CreateEnforcementUnit(EnforcementCreateDto enforcement)
         {
