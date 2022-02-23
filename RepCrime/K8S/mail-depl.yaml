@@ -15,11 +15,29 @@ spec:
       containers:
         - name: mailservice
           image: kotpuot/mailservice:latest
+          volumeMounts:
+          - name: mailmount
+            mountPath: "/etc/mailmount"
+            readOnly: true
           ports:
           - containerPort: 80
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: "Production"
+            - name: Username
+              valueFrom:
+                secretKeyRef:
+                  name: mail-cred
+                  key: username
+            - name: Password
+              valueFrom:
+                secretKeyRef:
+                  name: mail-cred
+                  key: password
+      volumes:
+      - name: mailmount
+        secret:
+          secretName: mail-cred
 ---
 apiVersion: v1
 kind: Service

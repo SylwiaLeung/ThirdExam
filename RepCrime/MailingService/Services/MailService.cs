@@ -38,7 +38,7 @@ namespace MailingService.Services
                 await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                await client.AuthenticateAsync(_configuration["EmailRecipient:Username"], _configuration["EmailRecipient:Password"]);
+                await client.AuthenticateAsync(_configuration["Username"], _configuration["Password"]);
 
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
