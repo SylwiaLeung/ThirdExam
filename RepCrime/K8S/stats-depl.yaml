@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: statisticservice
+  template:
+    metadata:
+      labels:
+        app: statisticservice
+    spec:
+      containers:
+        - name: statisticservice
+          image: kotpuot/statisticservice:latest
+          ports:
+          - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: statsclusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: statisticservice
+  ports:
+    - name: statisticservice
+      protocol: TCP
+      port: 80
+      targetPort: 80
