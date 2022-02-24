@@ -2,6 +2,7 @@ using EventBus.Messaging;
 using FluentValidation.AspNetCore;
 using LawEnforcement.Application;
 using LawEnforcement.Application.Behaviours;
+using LawEnforcement.Application.HttpClients;
 using LawEnforcement.Infrastructure;
 using LawEnforcement.Infrastructure.Persistence;
 using LawEnforcementAPI.EventBusConsumer;

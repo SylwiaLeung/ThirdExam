@@ -1,6 +1,6 @@
 ﻿using EventBus.Messaging.Events;
 
-namespace LawEnforcementAPI.HttpClients
+namespace LawEnforcement.Application.HttpClients
 {
     public interface ICrimeEventClient
     {

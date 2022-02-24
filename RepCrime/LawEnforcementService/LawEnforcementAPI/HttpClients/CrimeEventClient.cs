@@ -1,4 +1,5 @@
 ﻿using EventBus.Messaging.Events;
+using LawEnforcement.Application.HttpClients;
 using System.Text;
 using System.Text.Json;
 
